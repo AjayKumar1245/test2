@@ -52,6 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Prevent form submission if validation fails
         if (!isValid) {
             event.preventDefault();
+        } else {
+            // Show success dialog if form is valid
+            event.preventDefault(); // Prevent default form submission
+            showSuccessDialog();
         }
     });
 
@@ -61,4 +65,25 @@ document.addEventListener('DOMContentLoaded', () => {
         error.textContent = message;
         element.parentElement.appendChild(error);
     }
+
+    function showSuccessDialog() {
+        // Create and display a success dialog
+        const dialog = document.createElement('div');
+        dialog.className = 'success-dialog';
+        dialog.innerHTML = `
+            <div class="success-dialog-content">
+                <h2>Registration Completed Successfully</h2>
+                <p>Your application has been successfully submitted.</p>
+                <button class="success-dialog-close">Close</button>
+            </div>
+        `;
+
+        document.body.appendChild(dialog);
+
+        // Close dialog event
+        dialog.querySelector('.success-dialog-close').addEventListener('click', () => {
+            document.body.removeChild(dialog);
+        });
+    }
 });
+
